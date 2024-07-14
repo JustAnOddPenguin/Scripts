@@ -11,7 +11,6 @@ FileFlow is a Python 3 program designed to convert legacy Microsoft Office files
   - [Convert Files](#convert-files)
 - [Why Conversion is Necessary](#why-conversion-is-necessary)
   - [Security Compliance](#security-compliance)
-  - [Interoperability](#interoperability)
   - [Accessibility and Features](#accessibility-and-features)
 
 ## Features
@@ -84,10 +83,6 @@ Compliance with contemporary security frameworks and standards is critical for o
   6. Patch Operating Systems
   7. Multi-Factor Authentication
   8. Regular Backups
-
-### Interoperability
-
-Modern Office file formats are based on open standards, ensuring better compatibility with various software and platforms. Converting legacy files to these formats allows for seamless sharing and collaboration across different systems and devices.
 
 ### Accessibility and Features
 
