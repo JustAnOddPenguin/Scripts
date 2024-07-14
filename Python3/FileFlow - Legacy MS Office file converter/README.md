@@ -27,7 +27,7 @@ FileFlow is a Python 3 program designed to convert legacy Microsoft Office files
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/
+   git clone https://github.com/](https://github.com/JustAnOddPenguin/Scripts.git
    cd FileFlow
    ```
 
