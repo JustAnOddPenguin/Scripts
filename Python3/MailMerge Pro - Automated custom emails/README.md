@@ -36,7 +36,7 @@ Before running MailMerge Pro, ensure you have the following:
 
     ```python
     smtp_server = "your_smtp_server"
-    smtp_port = your_smtp_port
+    smtp_port = "your_smtp_port"
     ```
 
 2. **Run the Application:**
