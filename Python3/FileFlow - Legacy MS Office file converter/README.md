@@ -1,7 +1,6 @@
 ## FileFlow
 
-FileFlow is a Python 3 program designed to convert legacy Microsoft Office files (e.g., .doc, .xls, .ppt) to modern XML-based file formats (e.g., .docx, .xlsx, .pptx). 
-This conversion is crucial for ensuring compliance with contemporary security frameworks and improving document interoperability and accessibility.
+FileFlow is a Python 3 program designed to convert legacy Microsoft Office files (e.g., .doc, .xls, .ppt) to modern XML-based file formats (e.g., .docx, .xlsx, .pptx). This conversion is crucial for ensuring compliance with contemporary security frameworks and improving document interoperability and accessibility. 
 
 ## Table of Contents
 
@@ -56,6 +55,8 @@ This conversion is crucial for ensuring compliance with contemporary security fr
 5. Choose the 'Convert' operation.
 6. Check the 'Delete original files after conversion' if you want to delete the original files after conversion.
 7. Click 'Run' to start converting the files.
+
+**Note:** FileFlow is not able to differentiate between macro-enabled legacy files and non-macro files. By default, all files are converted to non-macro-enabled modern formats (e.g., .docx, .xlsx).
 
 ## Why Conversion is Necessary
 
