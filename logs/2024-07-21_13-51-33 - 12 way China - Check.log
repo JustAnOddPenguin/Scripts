@@ -1,0 +1,42 @@
+2024-07-21 13:51:33 - DEBUG - File handler added to logger
+2024-07-21 13:51:33 - INFO - Starting detection in directory: C:\Temp\Trial folder\12 way China
+2024-07-21 13:51:33 - INFO - Cutoff date for file modification: 2024-07-19
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\106300 Forequarter.doc, Last Modified: 2024-07-21 11:12:58.281729
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\106300 Forequarter.doc
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\106300 Forequarter.pdf, Last Modified: 2024-07-21 11:12:59.390698
+2024-07-21 13:51:33 - DEBUG - File C:\Temp\Trial folder\12 way China\106300 Forequarter.pdf does not match the file types ['.doc']
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\150300 Butt.doc, Last Modified: 2024-07-21 11:13:03.044197
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\150300 Butt.doc
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\150300 Butt.pdf, Last Modified: 2024-07-21 11:13:03.773883
+2024-07-21 13:51:33 - DEBUG - File C:\Temp\Trial folder\12 way China\150300 Butt.pdf does not match the file types ['.doc']
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\154000 Rump and Loin.doc, Last Modified: 2024-07-21 11:13:08.014625
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\154000 Rump and Loin.doc
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\154000 Rump and Loin.pdf, Last Modified: 2024-07-21 11:13:08.765429
+2024-07-21 13:51:33 - DEBUG - File C:\Temp\Trial folder\12 way China\154000 Rump and Loin.pdf does not match the file types ['.doc']
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\159000 Rib Set.doc, Last Modified: 2024-07-21 11:13:13.410755
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\159000 Rib Set.doc
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\159000 Rib Set.pdf, Last Modified: 2024-07-21 11:13:14.095907
+2024-07-21 13:51:33 - DEBUG - File C:\Temp\Trial folder\12 way China\159000 Rib Set.pdf does not match the file types ['.doc']
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\162400 Clod and Foreleg.doc, Last Modified: 2024-07-21 11:13:17.048496
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\162400 Clod and Foreleg.doc
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\162400 Clod and Foreleg.pdf, Last Modified: 2024-07-21 11:13:17.756747
+2024-07-21 13:51:33 - DEBUG - File C:\Temp\Trial folder\12 way China\162400 Clod and Foreleg.pdf does not match the file types ['.doc']
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\164300 Brisket and Flank.doc, Last Modified: 2024-07-21 11:13:21.435351
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\164300 Brisket and Flank.doc
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\164300 Brisket and Flank.pdf, Last Modified: 2024-07-21 11:13:22.187055
+2024-07-21 13:51:33 - DEBUG - File C:\Temp\Trial folder\12 way China\164300 Brisket and Flank.pdf does not match the file types ['.doc']
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\Neck.doc, Last Modified: 2024-07-21 11:13:25.905539
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\Neck.doc
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\Rib Set 7 rib.doc, Last Modified: 2024-07-21 11:13:29.854331
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\Rib Set 7 rib.doc
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\Shank.doc, Last Modified: 2024-07-21 11:13:39.148413
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\Shank.doc
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\Short Loin.doc, Last Modified: 2024-07-21 11:13:46.315650
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\Short Loin.doc
+2024-07-21 13:51:33 - DEBUG - Checking file: C:\Temp\Trial folder\12 way China\Short Ribs 12 rib.doc, Last Modified: 2024-07-21 11:13:52.661821
+2024-07-21 13:51:33 - INFO - Detected file: C:\Temp\Trial folder\12 way China\Short Ribs 12 rib.doc
+2024-07-21 13:51:33 - INFO - Detection completed. Total files checked: 17, Files detected: 11
+2024-07-21 13:53:08 - INFO - Program execution completed
+2024-07-21 13:53:08 - INFO - Summary:
+2024-07-21 13:53:08 - INFO - Log folder checked and created if necessary
+2024-07-21 13:53:08 - INFO - Operation performed: check or convert files
