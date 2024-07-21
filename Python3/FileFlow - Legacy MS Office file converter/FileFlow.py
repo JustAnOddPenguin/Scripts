@@ -138,11 +138,11 @@ def convert_files(directory, cutoff_date, delay=2, file_types=['.xls', '.doc'], 
             try:
                 if file_path.endswith('.xls'):
                     # Open the .xls file with xlwings
-                    wb = app.books.open(file_path)
+                    wb = app.books.open(os.path.abspath(file_path))  # Ensure the path is absolute
                     logger.info(f"Opened file: {file_path}")
 
                     # Create the new file path with .xlsx extension
-                    new_file_path = file_path.rsplit('.', 1)[0] + '.xlsx'
+                    new_file_path = os.path.abspath(file_path.rsplit('.', 1)[0] + '.xlsx')
                     logger.info(f"Converting to: {new_file_path}")
 
                     # Save the workbook with the .xlsx extension
@@ -155,11 +155,11 @@ def convert_files(directory, cutoff_date, delay=2, file_types=['.xls', '.doc'], 
 
                 elif file_path.endswith('.doc'):
                     # Open the .doc file with pywin32
-                    doc = word.Documents.Open(file_path)
+                    doc = word.Documents.Open(os.path.abspath(file_path))  # Ensure the path is absolute
                     logger.info(f"Opened file: {file_path}")
 
                     # Create the new file path with .docx extension
-                    new_file_path = file_path.rsplit('.', 1)[0] + '.docx'
+                    new_file_path = os.path.abspath(file_path.rsplit('.', 1)[0] + '.docx')
                     logger.info(f"Converting to: {new_file_path}")
 
                     # Save the document with the .docx extension
@@ -169,7 +169,7 @@ def convert_files(directory, cutoff_date, delay=2, file_types=['.xls', '.doc'], 
 
                 # Optionally, delete the old .xls or .doc file
                 if delete_originals:
-                    os.remove(file_path)
+                    os.remove(os.path.abspath(file_path))  # Ensure the path is absolute
                     logger.info(f"Deleted original file: {file_path}")
 
             except Exception as e:
