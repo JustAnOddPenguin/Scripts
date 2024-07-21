@@ -89,15 +89,17 @@ def detect_files(directory, cutoff_date, file_types=['.xls', '.doc']):
     logger.info(f"Starting detection in directory: {directory}")
     logger.info(f"Cutoff date for file modification: {cutoff_date.strftime('%Y-%m-%d')}")
 
+    total_files_checked = 0
+    files_to_check = []
+
     try:
-        # Collect all specified file types in the directory
-        files_to_check = []
         for root, dirs, files in os.walk(directory):
             for file in files:
-                if any(file.endswith(ft) for ft in file_types):
+                total_files_checked += 1
+                if any(file.lower().endswith(ft.lower()) for ft in file_types):
                     file_path = os.path.join(root, file)
-                    # Check if the file was modified after the cutoff date
                     last_modified_date = datetime.fromtimestamp(os.path.getmtime(file_path))
+                    logger.debug(f"File: {file_path}, Last Modified: {last_modified_date}")
                     if last_modified_date > cutoff_date:
                         files_to_check.append(file_path)
                         logger.info(f"Detected file: {file_path}")
@@ -105,14 +107,16 @@ def detect_files(directory, cutoff_date, file_types=['.xls', '.doc']):
     except Exception as e:
         logger.error(f"Error during detection: {e}")
 
-    logger.info("Detection completed.")
+    logger.info(f"Detection completed. Total files checked: {total_files_checked}, Files detected: {len(files_to_check)}")
 
 def convert_files(directory, cutoff_date, delay=2, file_types=['.xls', '.doc'], delete_originals=False):
     logger = logging.getLogger()
     logger.info(f"Starting conversion in directory: {directory}")
     logger.info(f"Cutoff date for file modification: {cutoff_date.strftime('%Y-%m-%d')}")
 
-    # Create an instance of the Excel application
+    total_files_checked = 0
+    total_files_converted = 0
+
     app = xw.App(visible=False)
     app.display_alerts = False
     app.screen_updating = False
@@ -120,69 +124,63 @@ def convert_files(directory, cutoff_date, delay=2, file_types=['.xls', '.doc'], 
     word = win32.Dispatch("Word.Application")
     word.Visible = False
 
+    files_to_convert = []
+
     try:
-        # Collect all specified file types in the directory
-        files_to_convert = []
         for root, dirs, files in os.walk(directory):
             for file in files:
-                if any(file.endswith(ft) for ft in file_types):
+                total_files_checked += 1
+                if any(file.lower().endswith(ft.lower()) for ft in file_types):
                     file_path = os.path.join(root, file)
-                    # Check if the file was modified within the last 2 months
                     last_modified_date = datetime.fromtimestamp(os.path.getmtime(file_path))
+                    logger.debug(f"File: {file_path}, Last Modified: {last_modified_date}")
                     if last_modified_date > cutoff_date:
                         files_to_convert.append(file_path)
-        
+
         for file_path in files_to_convert:
             logger.info(f"Processing file: {file_path}")
 
             try:
-                if file_path.endswith('.xls'):
-                    # Open the .xls file with xlwings
-                    wb = app.books.open(os.path.abspath(file_path))  # Ensure the path is absolute
+                if file_path.lower().endswith('.xls'):
+                    wb = app.books.open(os.path.abspath(file_path))
                     logger.info(f"Opened file: {file_path}")
 
-                    # Create the new file path with .xlsx extension
                     new_file_path = os.path.abspath(file_path.rsplit('.', 1)[0] + '.xlsx')
                     logger.info(f"Converting to: {new_file_path}")
 
-                    # Save the workbook with the .xlsx extension
                     wb.save(new_file_path)
                     logger.info(f"Saved file as: {new_file_path}")
 
-                    # Close the workbook
                     wb.close()
                     logger.info(f"Closed file: {file_path}")
 
-                elif file_path.endswith('.doc'):
-                    # Open the .doc file with pywin32
-                    doc = word.Documents.Open(os.path.abspath(file_path))  # Ensure the path is absolute
+                elif file_path.lower().endswith('.doc'):
+                    doc = word.Documents.Open(os.path.abspath(file_path))
                     logger.info(f"Opened file: {file_path}")
 
-                    # Create the new file path with .docx extension
                     new_file_path = os.path.abspath(file_path.rsplit('.', 1)[0] + '.docx')
                     logger.info(f"Converting to: {new_file_path}")
 
-                    # Save the document with the .docx extension
-                    doc.SaveAs(new_file_path, FileFormat=16)  # 16 corresponds to the wdFormatXMLDocument file format
+                    doc.SaveAs(new_file_path, FileFormat=16)
                     doc.Close()
                     logger.info(f"Saved file as: {new_file_path}")
 
-                # Optionally, delete the old .xls or .doc file
                 if delete_originals:
-                    os.remove(os.path.abspath(file_path))  # Ensure the path is absolute
+                    os.remove(os.path.abspath(file_path))
                     logger.info(f"Deleted original file: {file_path}")
+
+                total_files_converted += 1
 
             except Exception as e:
                 logger.error(f"Error processing file {file_path}: {e}")
 
-            # Wait for the specified delay before processing the next file
             time.sleep(delay)
 
     finally:
         app.quit()
         word.Quit()
 
-    logger.info("Conversion completed.")
+    logger.info(f"Conversion completed. Total files checked: {total_files_checked}, Files converted: {total_files_converted}")
 
 # GUI Application
 class Application(tk.Tk):
@@ -190,9 +188,8 @@ class Application(tk.Tk):
         super().__init__()
 
         self.title("Legacy file checker and converter")
-        self.geometry("920x700")  # Increased the size of the window
+        self.geometry("920x700")
 
-        # Directory Selection
         self.label_dir = tk.Label(self, text="Target Directory:")
         self.label_dir.grid(row=0, column=0, padx=10, pady=5, sticky="w")
         self.entry_dir = tk.Entry(self, width=50)
@@ -200,19 +197,16 @@ class Application(tk.Tk):
         self.button_browse = tk.Button(self, text="Browse", command=self.browse_directory)
         self.button_browse.grid(row=0, column=1, padx=5, pady=5, sticky="w")
 
-        # Number of Days
         self.label_days = tk.Label(self, text="Number of Days for Cutoff Date:")
         self.label_days.grid(row=1, column=0, padx=10, pady=5, sticky="w")
         self.entry_days = tk.Entry(self, width=10)
         self.entry_days.grid(row=1, column=1, padx=10, pady=5, sticky="w")
 
-        # Processing Time per File
         self.label_delay = tk.Label(self, text="Processing Time per File (seconds):")
         self.label_delay.grid(row=2, column=0, padx=10, pady=5, sticky="w")
         self.entry_delay = tk.Entry(self, width=10)
         self.entry_delay.grid(row=2, column=1, padx=10, pady=5, sticky="w")
 
-        # File Types
         self.label_file_types = tk.Label(self, text="File Types:")
         self.label_file_types.grid(row=3, column=0, padx=10, pady=5, sticky="w")
         self.var_doc = tk.BooleanVar()
@@ -222,7 +216,6 @@ class Application(tk.Tk):
         self.check_xls = tk.Checkbutton(self, text="*.xls", variable=self.var_xls)
         self.check_xls.grid(row=3, column=2, padx=5, pady=5, sticky="w")
 
-        # Operation Selection
         self.label_operation = tk.Label(self, text="Operation:")
         self.label_operation.grid(row=4, column=0, padx=10, pady=5, sticky="w")
         self.var_operation = tk.StringVar(value="check")
@@ -231,21 +224,17 @@ class Application(tk.Tk):
         self.radio_convert = tk.Radiobutton(self, text="Convert", variable=self.var_operation, value="convert")
         self.radio_convert.grid(row=4, column=2, padx=5, pady=5, sticky="w")
 
-        # Delete Original Files After Conversion
         self.var_delete_originals = tk.BooleanVar()
         self.check_delete_originals = tk.Checkbutton(self, text="Delete original files after conversion", variable=self.var_delete_originals)
         self.check_delete_originals.grid(row=4, column=3, padx=5, pady=5, sticky="w")
 
-        # Run Button
         self.button_run = tk.Button(self, text="Run", command=self.run_operation)
         self.button_run.grid(row=5, column=0, columnspan=4, padx=10, pady=20)
 
-        # Help Button
         self.button_help = tk.Button(self, text="Help", command=self.show_help)
         self.button_help.grid(row=5, column=1, columnspan=4, padx=10, pady=20)
 
-        # Log Output
-        self.text_log = ScrolledText(self, state='disabled', width=110, height=30, font=("Courier", 10))  # Increased width and height, set monospaced font
+        self.text_log = ScrolledText(self, state='disabled', width=110, height=30, font=("Courier", 10))
         self.text_log.grid(row=6, column=0, columnspan=4, padx=10, pady=5)
 
     def browse_directory(self):
@@ -285,7 +274,6 @@ class Application(tk.Tk):
         operation = self.var_operation.get()
         delete_originals = self.var_delete_originals.get()
 
-        # Configure logging with text widget
         configure_logging(directory, f' - {operation.capitalize()}', self.text_log)
 
         if operation == 'check':
