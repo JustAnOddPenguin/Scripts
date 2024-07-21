@@ -1,2 +1,2 @@
-# Powershell
-This repo is a list of all scripts that I have used
+# Scripts & programs
+This repo is a collection of all scripts and program I have made and used
